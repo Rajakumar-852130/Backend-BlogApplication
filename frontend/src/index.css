@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+/* Allow manual dark mode toggle using .dark class */
+@custom-variant dark (&:is(.dark *));
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  font-family: 'Inter', system-ui, sans-serif;
+  color-scheme: light;
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+.dark {
+  color-scheme: dark;
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  @apply bg-slate-50 dark:bg-slate-950 transition-colors duration-300;
+}
+
+/* Base Styles */
+.card {
+  @apply bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-2xl shadow-lg transition-all duration-300;
+}
+
+.card:hover {
+  transform: scale(1.01);
+  @apply dark:bg-slate-800/60 dark:border-blue-500/30 dark:shadow-[0_0_20px_rgba(59,130,246,0.1)];
+  @apply bg-slate-50 border-blue-400/30 shadow-[0_10px_25px_rgba(59,130,246,0.1)];
+}
+
+.input-field {
+  @apply w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700/50 rounded-xl px-4 py-2.5 text-slate-800 dark:text-slate-100 transition-all duration-300;
+}
+
+.input-field:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+.btn-primary {
+  @apply bg-blue-600 text-white font-bold py-2.5 px-6 rounded-xl transition-all duration-300 flex items-center gap-2 shadow-lg;
+  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.2);
+}
+
+.btn-primary:hover {
+  @apply bg-blue-500;
+  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: scale(0.95);
+}
+
+.btn-danger {
+  @apply bg-red-100 dark:bg-red-600/10 text-red-600 dark:text-red-500 border border-red-200 dark:border-red-600/20 py-2.5 px-4 rounded-xl transition-all duration-300 flex items-center gap-2;
+}
+
+.btn-danger:hover {
+  @apply bg-red-600 text-white border-red-600;
+}
+
+.btn-danger:active {
+  transform: scale(0.95);
+}
+
+.nav-link {
+  @apply flex items-center gap-2 text-slate-600 dark:text-slate-400 font-semibold transition-all duration-300 text-sm;
+}
+
+.nav-link:hover {
+  @apply text-blue-600 dark:text-blue-400;
+  transform: scale(1.05);
+}
+
+.nav-link:active {
+  transform: scale(0.95);
+}
+
+/* Layout Utilities */
+.container-custom {
+  @apply max-w-6xl mx-auto px-6;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-slate-100 dark:bg-slate-950;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-800 rounded-full hover:bg-slate-400 dark:hover:bg-slate-700;
+}
+
+/* Quill Editor Overrides for Dark Mode */
+.dark .ql-snow .ql-toolbar {
+  @apply border-slate-700 bg-slate-800/80;
+}
+.dark .ql-snow.ql-toolbar button {
+  @apply text-slate-300 hover:text-white;
+}
+.dark .ql-snow .ql-stroke {
+  @apply stroke-slate-300;
+}
+.dark .ql-snow .ql-fill, .dark .ql-snow .ql-stroke.ql-fill {
+  @apply fill-slate-300;
+}
+.dark .ql-snow .ql-picker {
+  @apply text-slate-300;
+}
+.dark .ql-snow .ql-picker-options {
+  @apply bg-slate-800 border-slate-700 text-slate-200;
+}
+.dark .ql-container.ql-snow {
+  @apply border-slate-700/50 bg-slate-900/50 text-slate-100 text-lg;
+  border-bottom-left-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+}
+.ql-container.ql-snow {
+  @apply border-slate-300 bg-slate-50 text-slate-800 text-lg;
+  border-bottom-left-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+}
+.ql-toolbar.ql-snow {
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  @apply border-slate-300 bg-white;
+}
