@@ -19,6 +19,18 @@ public class Post {
     @Column(length = 5000)
     private String content;
     private String author ;
+    private String category;
+    private String imageUrl;
+    private int likes = 0;
+    private int views = 0;
 
+    @jakarta.persistence.OneToMany(mappedBy = "post", cascade = jakarta.persistence.CascadeType.ALL, orphanRemoval = true)
+    private java.util.List<Comment> comments;
 
+    @org.hibernate.annotations.CreationTimestamp
+    @jakarta.persistence.Column(updatable = false)
+    private java.time.LocalDateTime createdAt;
+
+    @org.hibernate.annotations.UpdateTimestamp
+    private java.time.LocalDateTime updatedAt;
 }

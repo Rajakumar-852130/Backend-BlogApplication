@@ -20,9 +20,9 @@ public class PostService {
     }
 
 
-    public Post grtById(Long id){
-        return repo.findById(id).orElse(null);
-
+    public Post getById(Long id){
+        return repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Post not found with id: " + id));
     }
 
 
@@ -31,17 +31,31 @@ public class PostService {
     }
 
 
-public  void delete(Long id){
-    repo.deleteById(id);
-}
+    public  void delete(Long id){
+        repo.deleteById(id);
+    }
 
-public Post update(Long id,Post post) {
+    public Post update(Long id,Post post) {
         Post pre=repo.findById(id).orElseThrow();
 
         pre.setTitle(post.getTitle());
         pre.setContent(post.getContent());
         pre.setAuthor(post.getAuthor());
+        pre.setCategory(post.getCategory());
+        pre.setImageUrl(post.getImageUrl());
 
         return repo.save(pre);
-}
+    }
+
+    public Post incrementLike(Long id) {
+        Post post = repo.findById(id).orElseThrow();
+        post.setLikes(post.getLikes() + 1);
+        return repo.save(post);
+    }
+
+    public Post incrementView(Long id) {
+        Post post = repo.findById(id).orElseThrow();
+        post.setViews(post.getViews() + 1);
+        return repo.save(post);
+    }
 }

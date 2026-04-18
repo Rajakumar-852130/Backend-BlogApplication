@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/posts")
+@CrossOrigin(origins = "*")
 public class PostController {
 
 
@@ -19,18 +20,15 @@ public class PostController {
 
     @GetMapping
     public List<Post> getAll() {
-
         return service.getAll();
     }
 
     @GetMapping("/{id}")
     public Post getOne(@PathVariable Long id) {
-        return service.grtById(id);
-
+        return service.getById(id);
     }
 
     @PostMapping
-
     public Post create(@RequestBody Post post) {
         return service.create(post);
     }
@@ -38,14 +36,20 @@ public class PostController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id);
-
-
     }
 
     @PutMapping("/{id}")
-    public Post update(@PathVariable Long id,@RequestBody Post post) {
+    public Post update(@PathVariable Long id, @RequestBody Post post) {
         return service.update(id, post);
-
     }
 
+    @PostMapping("/{id}/like")
+    public Post likePost(@PathVariable Long id) {
+        return service.incrementLike(id);
+    }
+
+    @PostMapping("/{id}/view")
+    public Post viewPost(@PathVariable Long id) {
+        return service.incrementView(id);
+    }
 }
